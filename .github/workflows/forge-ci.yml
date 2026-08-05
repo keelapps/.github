@@ -1,0 +1,93 @@
+name: Forge CI (reusable)
+
+# Reusable CI for every Forge app in the keelapps org.
+#
+# Call it from a repo with:
+#
+#   jobs:
+#     ci:
+#       uses: keelapps/.github/.github/workflows/forge-ci.yml@main
+#       with:
+#         test-command: npm test
+#
+# The apps deliberately differ in toolchain (node:test / vitest / jest, JS vs TS),
+# so every step beyond install+test is opted into by passing a command. An empty
+# string means "this app does not have that step" and it is skipped rather than
+# failing.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node version to build and test against.
+        type: string
+        default: '22'
+      install-command:
+        description: Dependency install. `npm ci` needs a lockfile in sync with package.json.
+        type: string
+        default: npm ci
+      typecheck-command:
+        description: Optional. e.g. `npm run typecheck`. Skipped when empty.
+        type: string
+        default: ''
+      lint-command:
+        description: Optional. e.g. `npm run lint`. Skipped when empty.
+        type: string
+        default: ''
+      test-command:
+        description: Test command. Every app must have one.
+        type: string
+        default: npm test
+      ui-build-command:
+        description: >-
+          Optional. Only Custom UI apps need this (AccessLens builds
+          static/explore with Vite). UI Kit native apps leave it empty.
+        type: string
+        default: ''
+      working-directory:
+        description: Directory holding package.json, if not the repo root.
+        type: string
+        default: '.'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+          cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+
+      - name: Install dependencies
+        run: ${{ inputs.install-command }}
+
+      - name: Typecheck
+        if: inputs.typecheck-command != ''
+        run: ${{ inputs.typecheck-command }}
+
+      - name: Lint
+        if: inputs.lint-command != ''
+        run: ${{ inputs.lint-command }}
+
+      - name: Test
+        run: ${{ inputs.test-command }}
+
+      # Runs last: it is the slowest step and the least likely to catch a
+      # regression that the tests above did not already catch.
+      - name: Build UI
+        if: inputs.ui-build-command != ''
+        run: ${{ inputs.ui-build-command }}
+
+  # `forge lint` is intentionally absent from this workflow.
+  #
+  # Without `app.id` in the manifest it fails on the missing field; with it, it
+  # authenticates against Atlassian to validate scope names against the live
+  # catalogue. Since these repos deliberately keep `app.id` out of source
+  # control, there is nothing useful for it to do on a pull request. It runs in
+  # forge-deploy.yml instead, after the id has been injected.

@@ -1,0 +1,157 @@
+name: Forge deploy (reusable)
+
+# Reusable deploy for every Forge app in the keelapps org.
+#
+# Call it from a repo with:
+#
+#   jobs:
+#     deploy:
+#       uses: keelapps/.github/.github/workflows/forge-deploy.yml@main
+#       with:
+#         environment: development
+#       secrets: inherit
+#
+# ── Why the app id comes from a secret ───────────────────────────────────────
+# These repos deliberately keep `app.id` out of source control, so that a fork
+# cannot deploy over the real app. That means CI has to put it back before
+# `forge deploy` will run. It is injected from `vars.FORGE_APP_ID` (an id is
+# not a credential, so a variable is the honest place for it) with a fallback
+# to `secrets.FORGE_APP_ID` for repos that prefer to keep it out of the UI.
+#
+# ── Required configuration, per repo ─────────────────────────────────────────
+#   vars.FORGE_APP_ID       ari:cloud:ecosystem::app/<uuid>   from `forge register`
+#   secrets.FORGE_EMAIL     the Atlassian account email
+#   secrets.FORGE_API_TOKEN id.atlassian.com → Security → API tokens
+#
+# The token carries full account authority. Scope it to a machine account if you
+# ever move past a development environment, and rotate it if it is ever exposed.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Forge environment — development, staging or production.
+        type: string
+        default: development
+      node-version:
+        description: Node version to build against.
+        # Not '22': the current @forge/cli engine range is
+        # ">=20.18.1 <22.23.1 || >22.23.1 <24.17.0 || >24.17.0", and setup-node
+        # resolves the '22' major to exactly 22.23.1, which the CLI rejects.
+        type: string
+        default: '24'
+      install-command:
+        type: string
+        default: npm ci
+      ui-build-command:
+        description: Custom UI apps only. Must run before deploy so the bundle exists.
+        type: string
+        default: ''
+      working-directory:
+        type: string
+        default: '.'
+    secrets:
+      FORGE_EMAIL:
+        required: true
+      FORGE_API_TOKEN:
+        required: true
+      FORGE_APP_ID:
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # To gate production behind a required reviewer, create a GitHub Environment
+    # named `production` in the app repo and add `environment: production` here.
+    # It is left off deliberately: an empty environment name is not a valid value,
+    # so it cannot be made conditional from an input.
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    env:
+      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+      # Keeps the CLI from trying to open an interactive prompt on a runner.
+      FORGE_USAGE_ANALYTICS: 'false'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+          cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+
+      # @forge/cli bundles keytar, a native module that compiles against
+      # libsecret on Linux. The GitHub-hosted runner does not ship it, so
+      # without this the install fails at the gyp step with
+      # "Package 'libsecret-1' ... not found".
+      - name: Install system dependencies for Forge CLI
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
+      - name: Install Forge CLI
+        run: npm install -g @forge/cli@latest
+
+      # First run prompts for usage-analytics consent, which cannot render
+      # in a non-TTY runner. Opt out explicitly so later commands stay
+      # non-interactive.
+      - name: Opt out of Forge CLI usage analytics
+        run: forge settings set usage-analytics false
+
+      - name: Install dependencies
+        run: ${{ inputs.install-command }}
+
+      # Line-based rather than a YAML round-trip: these manifests carry comments
+      # explaining every scope, and a parse/serialise cycle would delete them.
+      - name: Inject app id into the manifest
+        env:
+          APP_ID: ${{ vars.FORGE_APP_ID || secrets.FORGE_APP_ID }}
+        run: |
+          if [ -z "$APP_ID" ]; then
+            echo "::error::Neither vars.FORGE_APP_ID nor secrets.FORGE_APP_ID is set."
+            echo "Run 'forge register' locally once, then save the emitted ari as FORGE_APP_ID."
+            exit 1
+          fi
+          cat > /tmp/inject-app-id.js <<'EOF'
+          const fs = require('fs');
+          const file = process.argv[2] || 'manifest.yml';
+          const appId = process.env.APP_ID;
+          if (!/^ari:cloud:ecosystem::app\/[0-9a-fA-F-]{36}$/.test(appId)) {
+            console.error(`APP_ID is not a Forge app ARI: ${appId}`);
+            process.exit(1);
+          }
+          const lines = fs.readFileSync(file, 'utf8').split('\n');
+          const appIdx = lines.findIndex((l) => /^app:\s*(#.*)?$/.test(l));
+          if (appIdx === -1) {
+            console.error(`No top-level 'app:' block in ${file}`);
+            process.exit(1);
+          }
+          let end = lines.length;
+          for (let i = appIdx + 1; i < lines.length; i++) {
+            const l = lines[i];
+            if (l.trim() === '' || /^\s/.test(l) || /^#/.test(l)) continue;
+            end = i;
+            break;
+          }
+          const existing = lines
+            .slice(appIdx + 1, end)
+            .findIndex((l) => /^\s{2}id:\s/.test(l));
+          if (existing !== -1) lines[appIdx + 1 + existing] = `  id: ${appId}`;
+          else lines.splice(appIdx + 1, 0, `  id: ${appId}`);
+          fs.writeFileSync(file, lines.join('\n'));
+          console.log(`app.id set in ${file}`);
+          EOF
+          node /tmp/inject-app-id.js manifest.yml
+
+      - name: Build UI
+        if: inputs.ui-build-command != ''
+        run: ${{ inputs.ui-build-command }}
+
+      # Now that app.id is present and credentials exist, lint validates scope
+      # names against the live Atlassian catalogue. This is the only place that
+      # check can run, which is why it is here and not in forge-ci.yml.
+      - name: Forge lint
+        run: forge lint
+
+      - name: Forge deploy
+        run: forge deploy --environment ${{ inputs.environment }} --non-interactive

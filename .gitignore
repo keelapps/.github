@@ -1,0 +1,4 @@
+# Local Claude Code settings — machine-specific, never shared
+.claude/settings.local.json
+
+.DS_Store
