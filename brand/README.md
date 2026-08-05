@@ -15,9 +15,17 @@ every size, and hand-editing an export breaks that silently.
 | --- | --- | --- |
 | `avatar-dark.png` | 1024×1024 | **GitHub org avatar**, app icons, anywhere square |
 | `avatar-light.png` | 1024×1024 | Square mark on dark surfaces (slide decks, dark UI) |
-| `banner-social.png` | 1280×640 | GitHub social preview, OG/Twitter card, README header |
+| `banner-social.png` | 1280×640 | GitHub social preview, OG/Twitter card |
 | `wordmark-transparent.png` | 1600×520 | Lockup on **light** backgrounds (navy ink) |
 | `wordmark-transparent-cream.png` | 1600×520 | Lockup on **dark** backgrounds (cream ink) |
+
+### The banner names products
+
+`banner-social.png` has `recur · accesslens · evergreen · digest` baked into the
+image, so it goes stale whenever the portfolio changes — it already omits
+`mail-templates`. Prefer the wordmark anywhere the product list would have to be
+kept in sync; reach for the banner only where a social card needs a filled
+1280×640 plate. To change the list, edit the string in `generate.py` and re-run.
 
 ### Two wordmarks, on purpose
 

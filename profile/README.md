@@ -1,20 +1,22 @@
-<img src="https://raw.githubusercontent.com/keelapps/.github/main/brand/banner-social.png" alt="keelapps — steady tools, built below the waterline" width="900">
+<picture>
+  <source media="(prefers-color-scheme: dark)"
+          srcset="https://raw.githubusercontent.com/keelapps/.github/main/brand/wordmark-transparent-cream.png">
+  <img alt="keelapps"
+       src="https://raw.githubusercontent.com/keelapps/.github/main/brand/wordmark-transparent.png"
+       width="380">
+</picture>
 
-Focused administration and compliance tools for Atlassian Cloud.
+**Steady tools, built below the waterline.**
 
-A small portfolio of apps, each doing one thing precisely rather than many things
-approximately.
+keelapps builds focused administration and compliance apps for Atlassian Cloud —
+for the people who run Jira and Confluence, rather than the people who file
+tickets in them.
 
-## Apps
-
-**AccessLens** for Jira — permission audit. Answers "which projects can this
-group reach", captures the answer as point-in-time evidence, and turns it into a
-signed-off access review. Runs entirely inside your Atlassian tenant and declares
-no external network access.
-
-**Digest** for Jira — daily and weekly roll-up digests.
-
-In development: `recur`, `evergreen`, `mail-templates`.
+The work concentrates on what Atlassian leaves to spreadsheets and one-off
+scripts: auditing who can access what and evidencing it for a compliance review,
+keeping recurring work on schedule, and stopping content and reporting from going
+stale. Each app does one thing precisely rather than many things approximately,
+and each is built on Atlassian Forge.
 
 ## How we build
 
@@ -23,5 +25,10 @@ way — ballast first, surface last. Nothing decorative survives; whatever remai
 has to bear load.
 
 Specs come before code, and they are kept honest: anything a spec asks to be
-verified during implementation gets its answer written back into the spec, and
-findings that contradict it are recorded rather than quietly absorbed.
+verified during implementation gets its answer written back, and findings that
+contradict it are recorded rather than quietly absorbed.
+
+---
+
+<sub>Our apps are closed-source. This organisation hosts brand assets and this
+profile; it is not where the products live.</sub>
