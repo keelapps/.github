@@ -1,0 +1,16 @@
+# Dependabot for the keelapps org's shared workflows.
+#
+# These workflows are consumed by every app repo via `uses: keelapps/.github/...@main`,
+# so bumping an action here automatically upgrades it everywhere downstream.
+# Group all GitHub Actions into a single PR per week to keep the noise down.
+
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - '*'
