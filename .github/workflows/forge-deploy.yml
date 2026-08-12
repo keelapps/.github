@@ -92,6 +92,12 @@ jobs:
       - name: Install Forge CLI
         run: npm install -g @forge/cli@latest
 
+      # First run prompts for usage-analytics consent, which cannot render
+      # in a non-TTY runner. Opt out explicitly so later commands stay
+      # non-interactive.
+      - name: Opt out of Forge CLI usage analytics
+        run: forge settings set usage-analytics false
+
       - name: Install dependencies
         run: ${{ inputs.install-command }}
 
