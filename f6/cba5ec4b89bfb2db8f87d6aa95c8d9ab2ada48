@@ -1,0 +1,19 @@
+.github/workflows/forge-deploy.yml
+  s_90c6daa9cec7af::t_0d11c9bf7cf5ec 37-40,42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f6cba5ec4b89bfb2db8f87d6aa95c8d9ab2ada48",
+  "prompts": {},
+  "sessions": {
+    "s_90c6daa9cec7af": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ff779-74fd-7ede-bcdc-d7357f8d6e0a",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
