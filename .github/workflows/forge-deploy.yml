@@ -34,8 +34,12 @@ on:
         type: string
         default: development
       node-version:
+        description: Node version to build against.
+        # Not '22': the current @forge/cli engine range is
+        # ">=20.18.1 <22.23.1 || >22.23.1 <24.17.0 || >24.17.0", and setup-node
+        # resolves the '22' major to exactly 22.23.1, which the CLI rejects.
         type: string
-        default: '22'
+        default: '24'
       install-command:
         type: string
         default: npm ci
