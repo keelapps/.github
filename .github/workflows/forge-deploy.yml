@@ -78,6 +78,13 @@ jobs:
           cache: npm
           cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
 
+      # @forge/cli bundles keytar, a native module that compiles against
+      # libsecret on Linux. The GitHub-hosted runner does not ship it, so
+      # without this the install fails at the gyp step with
+      # "Package 'libsecret-1' ... not found".
+      - name: Install system dependencies for Forge CLI
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
       - name: Install Forge CLI
         run: npm install -g @forge/cli@latest
 
