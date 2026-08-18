@@ -8,17 +8,16 @@
 
 **Steady tools, built below the waterline.**
 
-keelapps builds focused administration and compliance apps for Atlassian Cloud —
-for the people who run Jira and Confluence, rather than the people who file
-tickets in them.
+keelapps builds software for the work that has to keep happening whether or not
+anyone remembers it — permissions audited, schedules kept, pages kept true,
+files backed up. Each product does one thing precisely rather than many things
+approximately.
 
-The work concentrates on what Atlassian leaves to spreadsheets and one-off
-scripts: auditing who can access what and evidencing it for a compliance review,
-keeping recurring work on schedule, and stopping content and reporting from going
-stale. Each app does one thing precisely rather than many things approximately,
-and each is built on Atlassian Forge.
+## Atlassian Cloud
 
-## The apps
+For the people who run Jira and Confluence, rather than the people who file
+tickets in them. The work concentrates on what Atlassian leaves to spreadsheets
+and one-off scripts, and each app is built on Atlassian Forge.
 
 **AccessLens** — permission audit for Jira. Who can reach what, answered
 precisely enough to put in front of an auditor.
@@ -37,6 +36,15 @@ like your organisation wrote them.
 
 All five are in development; none are on the Atlassian Marketplace yet.
 
+## macOS
+
+**[Keelhaven](https://keelhaven.app)** — backup for your Mac. The folders you
+cannot lose, encrypted before they leave the machine, on storage you own. A
+one-time purchase, no account, no telemetry, and an open backup format you can
+restore from without us.
+
+In pre-release; the first public beta has not shipped yet.
+
 ## How we build
 
 The most important part of a vessel is the part nobody sees. We build the same
@@ -49,13 +57,13 @@ contradict it are recorded rather than quietly absorbed.
 
 ## Questions and feedback
 
-Bugs, feature requests, and questions go to
+Bugs, feature requests, and questions for every product go to
 [keelapps/support](https://github.com/keelapps/support) — including questions
-from before you have installed anything. If an app cannot do what you need, we
-would rather tell you early. Security vulnerabilities should be reported
+from before you have installed anything. If something cannot do what you need,
+we would rather tell you early. Security vulnerabilities should be reported
 privately; the policy lives in that repository.
 
 ---
 
-<sub>The apps are closed-source and built on Atlassian Forge. This organisation
-hosts brand assets, shared workflows, and the support tracker.</sub>
+<sub>All products are closed-source. This organisation hosts brand assets,
+shared workflows, and the support tracker.</sub>
