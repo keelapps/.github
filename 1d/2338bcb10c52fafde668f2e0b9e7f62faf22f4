@@ -1,0 +1,40 @@
+.github/dependabot.yml
+  s_8dd93691215667::t_3f41e3bda8156e 1-16
+.github/workflows/forge-ci.yml
+  s_8dd93691215667::t_6a5a2f05807ce8 1-93
+.github/workflows/forge-deploy.yml
+  s_8dd93691215667::t_3aa6a7897a78ce 1-157
+.gitignore
+  s_8dd93691215667::t_4013bce13ab7b9 1-4
+README.md
+  s_8dd93691215667::t_92b935a04fd1c8 1-5
+brand/README.md
+  s_8dd93691215667::t_5540fa55afd894 1-94
+brand/design-philosophy.md
+  s_8dd93691215667::t_5fdaba7c78c8e7 1-44
+brand/generate.py
+  s_8dd93691215667::t_971c942ccfdbfc 1-94
+profile/README.md
+  s_8dd93691215667::t_161cc1f0b41027 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "1d2338bcb10c52fafde668f2e0b9e7f62faf22f4",
+  "prompts": {},
+  "humans": {
+    "h_95e33fbd4ab2d9": {
+      "author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_8dd93691215667": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9bfc06ee-f21c-415f-8d8f-be1de155d220",
+        "model": "unknown"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
