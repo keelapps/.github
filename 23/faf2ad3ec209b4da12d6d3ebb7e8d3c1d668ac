@@ -1,0 +1,30 @@
+brand/design-philosophy.md
+  de61c07ac60025b5 1-44
+.gitignore
+  de61c07ac60025b5 1-4
+README.md
+  de61c07ac60025b5 1-5
+brand/generate.py
+  de61c07ac60025b5 1-94
+brand/README.md
+  de61c07ac60025b5 1-94
+.github/dependabot.yml
+  de61c07ac60025b5 1-16
+.github/workflows/forge-deploy.yml
+  de61c07ac60025b5 1-157
+.github/workflows/forge-ci.yml
+  de61c07ac60025b5 1-93
+profile/README.md
+  de61c07ac60025b5 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "23faf2ad3ec209b4da12d6d3ebb7e8d3c1d668ac",
+  "prompts": {},
+  "humans": {
+    "h_95e33fbd4ab2d9": {
+      "author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
