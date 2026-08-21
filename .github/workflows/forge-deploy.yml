@@ -61,6 +61,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # `forge deploy` waiting on a prompt that can never be answered would
+    # otherwise sit there until GitHub's 6-hour default kills it.
+    timeout-minutes: 30
     # To gate production behind a required reviewer, create a GitHub Environment
     # named `production` in the app repo and add `environment: production` here.
     # It is left off deliberately: an empty environment name is not a valid value,

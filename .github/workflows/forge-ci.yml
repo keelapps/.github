@@ -48,10 +48,22 @@ on:
         description: Directory holding package.json, if not the repo root.
         type: string
         default: '.'
+      cache-dependency-path:
+        description: >-
+          Lockfiles keying the npm cache. Defaults to the one in
+          working-directory. Apps with a nested package (AccessLens builds
+          static/explore, whose `npm install` was re-downloading everything on
+          every run) pass a multi-line list so the sub-package is cached too.
+        type: string
+        default: ''
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    # A job that hangs (a watch-mode test runner, a stalled network fetch)
+    # otherwise runs to GitHub's 6-hour default and bills 360 minutes for
+    # nothing. Nothing here has ever taken more than a couple of minutes.
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
@@ -62,7 +74,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
-          cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+          cache-dependency-path: ${{ inputs.cache-dependency-path || format('{0}/package-lock.json', inputs.working-directory) }}
 
       - name: Install dependencies
         run: ${{ inputs.install-command }}
