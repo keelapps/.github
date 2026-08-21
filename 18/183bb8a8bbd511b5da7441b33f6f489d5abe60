@@ -1,0 +1,26 @@
+.github/workflows/forge-ci.yml
+  s_895a153daaa8c4::t_6424de76cc4908 51-58,63-66,77
+.github/workflows/forge-deploy.yml
+  s_895a153daaa8c4::t_76ed0df85190a9 64-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "18183bb8a8bbd511b5da7441b33f6f489d5abe60",
+  "prompts": {},
+  "humans": {
+    "h_95e33fbd4ab2d9": {
+      "author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_895a153daaa8c4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3b41c0b0-0192-465d-8149-e75f9f1c7f48",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
