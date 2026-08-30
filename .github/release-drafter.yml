@@ -1,0 +1,142 @@
+# Shared release-drafter config for all keelapps repos.
+# https://github.com/release-drafter/release-drafter
+#
+# Consumed via the reusable workflow next to it
+# (.github/workflows/release-drafter.yml), which repos call with a thin
+# caller workflow.
+#
+# Uses the v7 category model (type / when conditions) — the pre-v7
+# `labels:`, `exclude-labels:`, and `version-resolver:` fields are deprecated.
+
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+categories:
+  - title: 💥 Breaking changes
+    when:
+      labels:
+        - breaking
+  - title: 🚀 Features
+    when:
+      labels:
+        - feature
+        - enhancement
+  - title: 🐛 Bug fixes
+    when:
+      labels:
+        - bug
+        - bugfix
+        - fix
+        - regression
+  - title: 📝 Documentation
+    when:
+      labels:
+        - documentation
+  - title: 🚦 Tests
+    when:
+      labels:
+        - test
+        - tests
+  - title: 👻 Maintenance
+    when:
+      labels:
+        - chore
+        - internal
+        - maintenance
+  - title: 📦 Dependencies
+    collapse-after: 15
+    when:
+      labels:
+        - dependencies
+  - title: 🗑 Removed
+    when:
+      labels:
+        - removed
+        - deprecated
+  - title: ✍ Other changes
+
+  # PRs with these labels are left out of the draft entirely
+  # (replaces the deprecated top-level `exclude-labels:`).
+  - type: pre-exclude
+    when:
+      labels:
+        - no-changelog
+        - skip-changelog
+        - invalid
+        - duplicate
+        - question
+        - wontfix
+
+  # Version bump from PR labels (replaces the deprecated
+  # `version-resolver:` block). Unmatched PRs fall back to patch.
+  - type: version-resolver
+    semver-increment: major
+    when:
+      labels:
+        - major
+  - type: version-resolver
+    semver-increment: minor
+    when:
+      labels:
+        - minor
+  - type: version-resolver
+    semver-increment: patch
+    when:
+      labels:
+        - patch
+
+change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+
+autolabeler:
+  # ── Title-based (conventional commit prefix) ──────────────
+  - label: enhancement
+    title:
+      - /^feat(\(.*\))?:.*/
+      - /^feature(\(.*\))?:.*/
+      - /^perf(\(.*\))?:.*/
+  - label: bug
+    title:
+      - /^fix(\(.*\))?:.*/
+      - /^bugfix(\(.*\))?:.*/
+  - label: documentation
+    title:
+      - /^docs(\(.*\))?:.*/
+  - label: chore
+    title:
+      - /^chore(\(.*\))?:.*/
+      - /^refactor(\(.*\))?:.*/
+      - /^style(\(.*\))?:.*/
+      - /^build(\(.*\))?:.*/
+      - /^revert(\(.*\))?:.*/
+  - label: tests
+    title:
+      - /^test(\(.*\))?:.*/
+      - /^tests(\(.*\))?:.*/
+
+  # ── Branch-based (Conventional Branch: feature/, bugfix/, hotfix/,
+  #    chore/ — the scheme keelapps repos use) ────────────────
+  - label: enhancement
+    branch:
+      - /^feature\/.+/
+      - /^feat\/.+/
+  - label: bug
+    branch:
+      - /^fix\/.+/
+      - /^bugfix\/.+/
+      - /^hotfix\/.+/
+  - label: chore
+    branch:
+      - /^chore\/.+/
+  - label: tests
+    branch:
+      - /^test\/.+/
+  - label: dependencies
+    branch:
+      - /^dependabot\//
