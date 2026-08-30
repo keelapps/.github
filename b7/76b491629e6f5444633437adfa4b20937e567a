@@ -1,0 +1,31 @@
+.github/dependabot.yml
+  s_f837db32c071ce::t_b4254f9e99663a 1-16
+.github/release-drafter.yml
+  s_f837db32c071ce::t_d103b6647985f5 1-142
+.github/workflows/forge-ci.yml
+  s_f837db32c071ce::t_79c920686f8391 1-105
+.github/workflows/forge-deploy.yml
+  s_f837db32c071ce::t_dea544f07162b1 1-160
+.github/workflows/pr-labeler.yml
+  s_f837db32c071ce::t_806109191b3bdb 1-23
+.github/workflows/release-drafter.yml
+  s_f837db32c071ce::t_ddd7c3a607bc5f 1-40
+profile/README.md
+  s_f837db32c071ce::t_fa8f465d238f01 1-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "b776b491629e6f5444633437adfa4b20937e567a",
+  "prompts": {},
+  "sessions": {
+    "s_f837db32c071ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b5c19a50-b1c3-457c-997a-97230392d9c3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
