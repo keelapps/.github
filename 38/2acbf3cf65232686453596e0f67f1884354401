@@ -1,0 +1,33 @@
+video/highlights.py
+  s_da468699fb7010::t_16b652ac2e8218 76
+  s_da468699fb7010::t_78a73ac56660c6 1-75,77-87
+video/build.py
+  s_da468699fb7010::t_16b652ac2e8218 245
+  s_da468699fb7010::t_134abf4e8b2278 1-244,246-382
+video/README.md
+  s_da468699fb7010::t_2c165e4f249f07 1-54
+video/music.py
+  s_da468699fb7010::t_6bacc53b59cb96 1-81
+video/specs/accesslens.json
+  s_da468699fb7010::t_aa975fee619dc0 1-85
+video/specs/evergreen.json
+  s_da468699fb7010::t_27e27fa24c61cc 1-85
+video/specs/recur.json
+  s_da468699fb7010::t_0e4856a28e3b2c 1-117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "382acbf3cf65232686453596e0f67f1884354401",
+  "prompts": {},
+  "sessions": {
+    "s_da468699fb7010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cfa962-6be9-4dca-aaea-775d79f0ecc6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
