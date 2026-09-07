@@ -1,0 +1,19 @@
+video/thumbnail.py
+  s_da468699fb7010::t_3031e24db079bf 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8b3f79e6b87cb92b8e51921aad907d6b2d09384c",
+  "prompts": {},
+  "sessions": {
+    "s_da468699fb7010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cfa962-6be9-4dca-aaea-775d79f0ecc6",
+        "model": "unknown"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
