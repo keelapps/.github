@@ -1,0 +1,25 @@
+video/record.mjs
+  s_da468699fb7010::t_92cb13479e8fec 89-98,101-106,131,299-339,477-502
+video/storyboards/accesslens.mjs
+  s_da468699fb7010::t_a0bbed19a776eb 24-37,41,48-52,58,65
+video/storyboards/evergreen.mjs
+  s_da468699fb7010::t_70dc0279bbfea9 9-14
+video/storyboards/recur.mjs
+  s_da468699fb7010::t_fe780b85d4df8b 13-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "58349bf8b0cc9ef2a4856255cae79a492d069d79",
+  "prompts": {},
+  "sessions": {
+    "s_da468699fb7010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cfa962-6be9-4dca-aaea-775d79f0ecc6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
