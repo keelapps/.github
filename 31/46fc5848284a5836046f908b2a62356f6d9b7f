@@ -1,0 +1,49 @@
+video/record.mjs
+  s_da468699fb7010::t_47ba99f3c3d2e3 1-291,293-555
+  s_da468699fb7010::t_e710afcb03e877 292
+  s_da468699fb7010::t_eef41fae401e55 556-574
+video/voice.py
+  s_da468699fb7010::t_614f870aea8b6f 138
+  s_da468699fb7010::t_9ee17f3f4db100 90-105
+  s_da468699fb7010::t_83cab17ba5fb5b 1-89,106-137,139-156
+video/storyboards/evergreen.mjs
+  s_da468699fb7010::t_ea2d78e312b165 1-80
+  s_da468699fb7010::t_d70ca559bdae7d 81-83
+video/build.py
+  s_da468699fb7010::t_d58b6a970fbbf2 244,250-256
+  s_da468699fb7010::t_bdea10f199f8f7 3,5,7-11,13,15-25,28,37,40-41,51-53,60,85-89,92-97,100-104,108-117,122,124-130,134-155,157-172,206-231,235,238-242,247-249,257-265,271-272,276-318,320,327-329,332-334,338-346,348-349,351
+  s_da468699fb7010::t_6f4f084a4f8e36 322-326,330-331
+  s_da468699fb7010::t_26bf2936c0e59d 175-198
+  s_da468699fb7010::t_cd2a99bd2e0ff4 173-174
+  s_da468699fb7010::t_ebf6e32e0b3f6d 243
+video/storyboards/recur.mjs
+  s_da468699fb7010::t_233d3679616f95 1-83
+  s_da468699fb7010::t_c7d83355a138e7 84-89
+video/storyboards/accesslens.mjs
+  s_da468699fb7010::t_99b705d182497f 1-75
+  s_da468699fb7010::t_77a0caf2ef50dd 76-79
+video/README.md
+  s_da468699fb7010::t_fd93fcaff1cfbc 33,35-40,42-71,75-79
+video/specs/accesslens.json
+  s_da468699fb7010::t_2a85ed039a99d1 6,19-20,24-25,29-30,34-35
+video/specs/evergreen.json
+  s_da468699fb7010::t_5440226c7f863f 6,19-20,24-25,29-30,34-35
+video/specs/recur.json
+  s_da468699fb7010::t_3042546d53bbe7 6-7,19-20,24-25,29-30,34-35,39-40,44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3146fc5848284a5836046f908b2a62356f6d9b7f",
+  "prompts": {},
+  "sessions": {
+    "s_da468699fb7010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cfa962-6be9-4dca-aaea-775d79f0ecc6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
