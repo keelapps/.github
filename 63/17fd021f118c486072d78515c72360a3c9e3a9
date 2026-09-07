@@ -1,0 +1,19 @@
+video/voice.py
+  s_da468699fb7010::t_8ded2774e35546 38-44,85,90,136,160,166-167,178-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6317fd021f118c486072d78515c72360a3c9e3a9",
+  "prompts": {},
+  "sessions": {
+    "s_da468699fb7010": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cfa962-6be9-4dca-aaea-775d79f0ecc6",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
