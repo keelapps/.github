@@ -19,8 +19,8 @@ every size, and hand-editing an export breaks that silently.
 | `wordmark-transparent-cream.png` | 1600×520 | Lockup on **dark** backgrounds (cream ink) |
 
 Nothing here names a product. Any asset that did would go stale the moment the
-portfolio changed, so the product list lives in the profile README and nowhere
-else.
+portfolio changed, so the product list lives at
+[keelapps.app](https://keelapps.app/) and nowhere else.
 
 ### Two wordmarks, on purpose
 
