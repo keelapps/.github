@@ -64,13 +64,21 @@ jobs:
     # otherwise runs to GitHub's 6-hour default and bills 360 minutes for
     # nothing. Nothing here has ever taken more than a couple of minutes.
     timeout-minutes: 15
+    # Read-only token. CI only reads the repo; without this the job gets
+    # whatever the caller's default token allows, which can include write.
+    permissions:
+      contents: read
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Nothing here pushes. Don't leave the token in .git/config where
+          # every npm install script and test could read it.
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm

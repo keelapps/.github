@@ -71,15 +71,23 @@ jobs:
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
+    # Read-only token: deploying talks to Atlassian with the Forge token, not
+    # to GitHub, so the GitHub token never needs write.
+    permissions:
+      contents: read
     env:
-      FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
-      FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
       # Keeps the CLI from trying to open an interactive prompt on a runner.
       FORGE_USAGE_ANALYTICS: 'false'
+      # FORGE_EMAIL / FORGE_API_TOKEN are deliberately NOT set here. Job-level
+      # env is visible to every step, including `npm ci`, whose dependency
+      # install scripts would then be able to read a production deploy token.
+      # They are given only to the two steps that talk to Atlassian.
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
@@ -154,7 +162,14 @@ jobs:
       # names against the live Atlassian catalogue. This is the only place that
       # check can run, which is why it is here and not in forge-ci.yml.
       - name: Forge lint
+        env:
+          FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+          FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
         run: forge lint
 
       - name: Forge deploy
-        run: forge deploy --environment ${{ inputs.environment }} --non-interactive
+        env:
+          FORGE_EMAIL: ${{ secrets.FORGE_EMAIL }}
+          FORGE_API_TOKEN: ${{ secrets.FORGE_API_TOKEN }}
+          FORGE_ENVIRONMENT: ${{ inputs.environment }}
+        run: forge deploy --environment "$FORGE_ENVIRONMENT" --non-interactive
