@@ -10,6 +10,11 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Wait a week before proposing a new release. A hijacked action release is
+    # usually caught and pulled within days; this keeps us from adopting it on
+    # day one. Security updates are not delayed by this.
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:

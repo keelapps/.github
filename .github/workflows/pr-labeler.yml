@@ -20,4 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          config-name: github:commit-check/.github:.github/release-drafter.yml
+          config-name: github:keelapps/.github:.github/release-drafter.yml
