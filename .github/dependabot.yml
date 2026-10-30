@@ -2,14 +2,15 @@
 #
 # These workflows are consumed by every app repo via `uses: keelapps/.github/...@main`,
 # so bumping an action here automatically upgrades it everywhere downstream.
-# Group all GitHub Actions into a single PR per week to keep the noise down.
+# Group all GitHub Actions into a single PR per month to keep the noise (and
+# the CI minutes it costs) down.
 
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
     # Wait a week before proposing a new release. A hijacked action release is
     # usually caught and pulled within days; this keeps us from adopting it on
     # day one. Security updates are not delayed by this.
