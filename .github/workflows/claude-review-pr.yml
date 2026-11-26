@@ -1,0 +1,19 @@
+name: Claude review
+
+# Claude reviews every pull request: inline comments on real problems, one
+# summary comment. The steps, the prompt and what gets skipped (drafts,
+# Dependabot) live in claude-review.yml next to this file, shared by every
+# repo in the org. The local path means a PR here is reviewed by its own
+# version of the workflow.
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+jobs:
+  review:
+    uses: ./.github/workflows/claude-review.yml
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    secrets: inherit
